@@ -11,6 +11,220 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
+
+    /* Dark Mode Palette */
+    [data-theme="dark"] {
+      --bg: #09090b;
+      --card-bg: #121215;
+      --surface: #18181b;
+      --border: #27272a;
+      --border-subtle: #1e1e24;
+      
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --emerald: #10b981;
+      --emerald-light: rgba(16, 185, 129, 0.15);
+      --emerald-border: rgba(16, 185, 129, 0.3);
+      
+      --teal: #14b8a6;
+      --teal-light: rgba(20, 184, 166, 0.15);
+      
+      --indigo: #6366f1;
+      --indigo-light: rgba(99, 102, 241, 0.15);
+      --indigo-border: rgba(99, 102, 241, 0.3);
+      
+      --amber: #f59e0b;
+      --amber-light: rgba(245, 158, 11, 0.15);
+      --amber-border: rgba(245, 158, 11, 0.3);
+      
+      --rose: #f43f5e;
+      --rose-light: rgba(244, 63, 94, 0.15);
+      --rose-border: rgba(244, 63, 94, 0.3);
+    }
+    [data-theme="dark"] header.app-header {
+      background: rgba(18, 18, 21, 0.85);
+      border-bottom-color: var(--border);
+    }
+    [data-theme="dark"] .course-reader-card,
+    [data-theme="dark"] .course-toc,
+    [data-theme="dark"] .palette-sidebar,
+    [data-theme="dark"] .question-card,
+    [data-theme="dark"] .exam-hero {
+      background: var(--card-bg);
+      border-color: var(--border);
+    }
+    [data-theme="dark"] .choice-row {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+    [data-theme="dark"] .choice-letter {
+      background: #27272a;
+      border-color: #3f3f46;
+      color: var(--text-secondary);
+    }
+    [data-theme="dark"] .course-body p,
+    [data-theme="dark"] .course-body li {
+      color: #cbd5e1;
+    }
+    [data-theme="dark"] .course-table th {
+      background: #1e1e24;
+      color: #e2e8f0;
+      border-color: var(--border);
+    }
+    [data-theme="dark"] .course-table td {
+      border-color: var(--border);
+      color: #cbd5e1;
+    }
+    [data-theme="dark"] .course-table tr:nth-child(even) {
+      background: #141418;
+    }
+    [data-theme="dark"] .callout-danger {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+    [data-theme="dark"] .callout-danger .callout-title { color: #f87171; }
+    [data-theme="dark"] .callout-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: #f59e0b;
+      color: #fcd34d;
+    }
+    [data-theme="dark"] .callout-warning .callout-title { color: #fbbf24; }
+    [data-theme="dark"] .callout-info {
+      background: rgba(14, 165, 233, 0.12);
+      border-color: #0ea5e9;
+      color: #bae6fd;
+    }
+    [data-theme="dark"] .callout-info .callout-title { color: #38bdf8; }
+    [data-theme="dark"] .callout-success {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: #10b981;
+      color: #a7f3d0;
+    }
+    [data-theme="dark"] .callout-success .callout-title { color: #34d399; }
+    [data-theme="dark"] .rationale-drawer {
+      background: #18181b;
+      border-color: var(--border);
+      color: #cbd5e1;
+    }
+
+    /* Action Circle Buttons in Header */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .action-circle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .action-circle-btn:hover {
+      background: white;
+      border-color: var(--teal);
+      transform: scale(1.06);
+    }
+    [data-theme="dark"] .action-circle-btn:hover {
+      background: #27272a;
+    }
+
+    /* Mascot Companion Floating Card */
+    .mascot-widget {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 99;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.6rem;
+      animation: bounceIn 0.4s ease-out;
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .mascot-bubble {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px 16px 4px 16px;
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-float);
+      max-width: 260px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-main);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    [data-theme="dark"] .mascot-bubble {
+      background: #18181b;
+      border-color: #27272a;
+      color: #f1f5f9;
+    }
+    .mascot-bubble:hover {
+      transform: translateY(-2px);
+    }
+    .mascot-avatar-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+      border: 2px solid white;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mascot-avatar-btn:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .mascot-avatar-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Level Growth Pill */
+    .level-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
     :root {
       --font-sans: 'Inter', 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-body: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -941,10 +1155,22 @@
         </button>
       </nav>
 
-      <!-- Search Filter -->
-      <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="globalSearch" placeholder="ค้นหาเนื้อหา / คำสำคัญ..." oninput="handleSearch()">
+      <!-- Header Actions: Search, Sound, Theme -->
+      <div class="header-actions">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="globalSearch" placeholder="ค้นหาเนื้อหา / คำสำคัญ..." oninput="handleSearch()">
+        </div>
+        
+        <!-- Sound Toggle Button -->
+        <button class="action-circle-btn" id="soundToggleBtn" onclick="toggleSound()" title="เปิด/ปิดเสียงเอฟเฟกต์ (Sound Effects)">
+          🔊
+        </button>
+
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="action-circle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="สลับโหมดมืด/สว่าง (Dark / Light Mode)">
+          🌙
+        </button>
       </div>
     </div>
   </header>
@@ -1045,6 +1271,21 @@
       </div>
     </div>
 
+
+    <!-- Confetti Overlay Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Cute Mascot Study Companion (Dr. Bony 🦴) -->
+    <div class="mascot-widget" id="mascotWidget">
+      <div class="mascot-bubble" id="mascotBubble" onclick="changeMascotTip()">
+        <span style="font-size: 0.72rem; font-weight: 700; color: var(--teal); display: block; margin-bottom: 0.15rem;">Dr. Bony (พี่หมอโบนี่)</span>
+        <span id="mascotText">ยินดีต้อนรับครับคุณหมอ! มาลุยสอบใบประกอบวิชาชีพ 03 ไปด้วยกันนะ 🦴✨</span>
+      </div>
+      <div class="mascot-avatar-btn" onclick="toggleMascotBubble()" title="คลิกคุยกับพี่หมอโบนี่">
+        🦴
+      </div>
+    </div>
+
   </main>
 
   <!-- Load External Scripts -->
@@ -1061,6 +1302,171 @@
     
     // User Answers: { [questionId]: { choiceIndex: number, isCorrect: boolean, isFlagged: boolean } }
     let userExamState = {};
+
+    
+    /* ========================================================
+       CUTE FEATURES: THEME, SOUND, MASCOT, CONFETTI & LEVEL
+       ======================================================== */
+    let currentTheme = localStorage.getItem('physio_theme') || 'light';
+    let soundEnabled = localStorage.getItem('physio_sound') !== 'false';
+    let audioCtx = null;
+    let hasTriggeredPassConfetti = false;
+
+    // Apply saved theme on load
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('physio_theme', newTheme);
+      
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+      playChime(newTheme === 'dark' ? [440, 330] : [330, 440]);
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('physio_sound', soundEnabled);
+      const btn = document.getElementById('soundToggleBtn');
+      if (btn) btn.innerText = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playChime([523, 659]);
+    }
+
+    // Web Audio Synthesizer (Zero external files needed)
+    function playChime(freqs, type = 'sine', duration = 0.12) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        
+        let startTime = audioCtx.currentTime;
+        freqs.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, startTime + (idx * duration));
+          
+          gain.gain.setValueAtTime(0.08, startTime + (idx * duration));
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + ((idx + 1) * duration));
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          
+          osc.start(startTime + (idx * duration));
+          osc.stop(startTime + ((idx + 1) * duration));
+        });
+      } catch (e) {
+        // AudioContext disabled or not permitted
+      }
+    }
+
+    function playCorrectSound() {
+      playChime([523.25, 659.25, 783.99], 'sine', 0.1); // C5, E5, G5 cheerful ascending
+    }
+
+    function playWrongSound() {
+      playChime([330, 261.63], 'triangle', 0.14); // E4, C4 gentle low boop
+    }
+
+    function playFanfareSound() {
+      playChime([523.25, 659.25, 783.99, 1046.50], 'triangle', 0.15); // Full C Major fanfare
+    }
+
+    // Mascot Tips & Interaction
+    const mascotTips = [
+      "สูตร Wainner Cluster: Spurling A + Distraction + ULTT 1 + Rotation < 60° จำให้แม่นนะ! 💡",
+      "กฎ Scoliosis: 'ยืดด้านเว้า (Concave) / เสริมแรงด้านนูน (Convex)' อย่าสับสนนะคุณหมอ! 🦴",
+      "เด็ก Down Syndrome ที่มี AAI ห้ามเล่นแทรมโพลีนและม้วนหน้าม้วนหลังเด็ดขาด! ⚠️",
+      "Duchenne Muscular Dystrophy (DMD) มีข้อห้ามสำคัญคือ 'ห้ามทำ Eccentric Exercise'! ❌",
+      "Autonomic Dysreflexia ในคนไข้ SCI T6 ขึ้นไป สิ่งแรกที่ต้องทำคือ 'จับนั่ง 90° ทันที'! 🚨",
+      "กฎขึ้นลงบันได: 'ขึ้นเอาขาดีขึ้นก่อน ลงเอาไม้และขาเจ็บลงก่อน' (Up with good, Down with bad) 🪜",
+      "พักสายตาสัก 20 วินาที มองออกไปไกลๆ แล้วค่อยลุยข้อต่อไปนะคุณหมอ! 👁️💧",
+      "ความพยายามในวันนี้ คือเสื้อกาวน์ที่มีชื่อเราในวันข้างหน้านะครับ สู้ๆ! 🥼✨"
+    ];
+
+    function changeMascotTip() {
+      const idx = Math.floor(Math.random() * mascotTips.length);
+      document.getElementById('mascotText').innerText = mascotTips[idx];
+      playChime([659.25, 783.99]);
+    }
+
+    function setMascotCheer(text) {
+      const bubble = document.getElementById('mascotBubble');
+      const textElem = document.getElementById('mascotText');
+      if (bubble && textElem) {
+        textElem.innerText = text;
+        bubble.style.display = 'block';
+      }
+    }
+
+    function toggleMascotBubble() {
+      const bubble = document.getElementById('mascotBubble');
+      if (bubble) {
+        bubble.style.display = bubble.style.display === 'none' ? 'block' : 'none';
+        if (bubble.style.display !== 'none') changeMascotTip();
+      }
+    }
+
+    // Canvas Confetti Celebration
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#10b981', '#06b6d4', '#6366f1', '#f59e0b', '#ec4899', '#3b82f6'];
+
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.8) * 16,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 10,
+          life: 1
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+
+        particles.forEach(p => {
+          if (p.life > 0) {
+            active = true;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.35; // Gravity
+            p.rotation += p.vrot;
+            p.life -= 0.012;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        });
+
+        if (active) {
+          requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      animate();
+    }
 
     // Initialize Application
     document.addEventListener('DOMContentLoaded', () => {
@@ -1239,6 +1645,14 @@
         isCorrect: isCorrect
       };
 
+      if (isCorrect) {
+        playCorrectSound();
+        setMascotCheer("เก่งมากคุณหมอ! ตอบถูกต้อง +1 คะแนน 🎉✨");
+      } else {
+        playWrongSound();
+        setMascotCheer("ข้อนี้ไม่เป็นไรนะคุณหมอ อ่านเฉลยข้างล่างแล้วเก็บเป็นสูตรจำไว้สอบจริง! 💡");
+      }
+
       // Re-render specific card
       const card = document.getElementById(`card-${setId}-${qNum}`);
       if (card) {
@@ -1351,6 +1765,12 @@
       if (correctCount >= 60) {
         passBadge.className = 'pass-indicator passed';
         passBadge.innerText = `🎉 ผ่านเกณฑ์การสอบ (${correctCount}/100 - PASS)`;
+        if (!hasTriggeredPassConfetti) {
+          hasTriggeredPassConfetti = true;
+          launchConfetti();
+          playFanfareSound();
+          setMascotCheer("ไชโยยย! 🎊 คุณได้ " + correctCount + " คะแนน ผ่านเกณฑ์สอบสภาฯ 60/100 แล้ว! สุดยอดมากคุณหมอ! 🎓");
+        }
       } else {
         const needed = 60 - correctCount;
         passBadge.className = 'pass-indicator pending';
