@@ -140,64 +140,7 @@
       background: #27272a;
     }
 
-    /* Mascot Companion Floating Card */
-    .mascot-widget {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 99;
-      display: flex;
-      align-items: flex-end;
-      gap: 0.6rem;
-      animation: bounceIn 0.4s ease-out;
-    }
-    @keyframes bounceIn {
-      0% { opacity: 0; transform: scale(0.8) translateY(10px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .mascot-bubble {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px 16px 4px 16px;
-      padding: 0.75rem 1rem;
-      box-shadow: var(--shadow-float);
-      max-width: 260px;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: var(--text-main);
-      position: relative;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    [data-theme="dark"] .mascot-bubble {
-      background: #18181b;
-      border-color: #27272a;
-      color: #f1f5f9;
-    }
-    .mascot-bubble:hover {
-      transform: translateY(-2px);
-    }
-    .mascot-avatar-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-full);
-      background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
-      border: 2px solid white;
-      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .mascot-avatar-btn:hover {
-      transform: scale(1.1) rotate(5deg);
-    }
-    .mascot-avatar-btn:active {
-      transform: scale(0.95);
-    }
+
 
     /* Confetti Canvas */
     #confetti-canvas {
@@ -1123,12 +1066,410 @@
       color: #15803d;
     }
 
-    /* Responsive */
-    @media (max-width: 992px) {
-      .exam-split { grid-template-columns: 1fr; }
-      .palette-sidebar { position: static; margin-bottom: 2rem; }
-      .course-layout { grid-template-columns: 1fr; }
-      .course-toc { position: static; max-height: none; }
+    /* ========================================================
+       MOBILE-FIRST RESPONSIVE & TOUCH OPTIMIZATIONS
+       ======================================================== */
+    /* Mobile Chapter Horizontal Scroll Bar */
+    .mobile-chapter-bar {
+      display: none;
+      margin-bottom: 1.25rem;
+    }
+    .mobile-chapter-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.25rem 0.2rem 0.6rem;
+      scrollbar-width: none;
+    }
+    .mobile-chapter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .mob-chapter-pill {
+      flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s;
+    }
+    .mob-chapter-pill.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+      box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25);
+    }
+
+    /* Chapter Reader Footer Navigation */
+    .chapter-nav-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .chap-nav-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.65rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s;
+    }
+    .chap-nav-btn:hover {
+      background: white;
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    [data-theme="dark"] .chap-nav-btn:hover {
+      background: #27272a;
+    }
+    .chap-nav-btn.next {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+      margin-left: auto;
+    }
+    .chap-nav-btn.next:hover {
+      background: #0f766e;
+    }
+
+    /* Mobile Sticky Exam Action Bar */
+    .mobile-exam-floating-bar {
+      display: none;
+      position: sticky;
+      top: 3.85rem;
+      z-index: 80;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.85rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-card);
+      align-items: center;
+      justify-content: space-between;
+    }
+    [data-theme="dark"] .mobile-exam-floating-bar {
+      background: rgba(18, 18, 21, 0.94);
+      border-color: var(--border);
+    }
+    .mob-open-pal-btn {
+      background: var(--teal-light);
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    [data-theme="dark"] .mob-open-pal-btn {
+      background: rgba(20, 184, 166, 0.18);
+    }
+
+    /* Question Stepper Buttons in Cards */
+    .q-nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .q-step-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .q-step-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .q-step-btn.unanswered-step {
+      background: var(--teal-light);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* Mobile Bottom Navigation Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(56px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      z-index: 1000;
+      align-items: center;
+      justify-content: space-around;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="dark"] .mobile-bottom-nav {
+      background: rgba(18, 18, 21, 0.96);
+      border-top-color: var(--border);
+    }
+    .mob-nav-item {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .mob-nav-item.active {
+      color: var(--teal);
+    }
+    .mob-nav-item .icon {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .mob-nav-badge {
+      position: absolute;
+      top: 5px;
+      right: calc(50% - 18px);
+      background: var(--teal);
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.08rem 0.35rem;
+      border-radius: var(--radius-full);
+      line-height: 1.2;
+    }
+
+    /* Mobile Palette Bottom Sheet Modal */
+    .mobile-palette-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1050;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+    .mobile-palette-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+    .mobile-palette-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 82vh;
+      background: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      z-index: 1060;
+      padding: 1.25rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    [data-theme="dark"] .mobile-palette-sheet {
+      background: #18181b;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-palette-backdrop.open .mobile-palette-sheet {
+      transform: translateY(0);
+    }
+    .sheet-handle-bar {
+      width: 44px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 0 auto 0.85rem;
+    }
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+    .sheet-header h3 {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .sheet-close-btn {
+      background: var(--surface);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 900px) {
+      body {
+        padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+      }
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      .mobile-chapter-bar {
+        display: block;
+      }
+      .mobile-exam-floating-bar {
+        display: flex;
+      }
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+      .course-toc {
+        display: none; /* Replaced by the sleek horizontal chapter pills bar! */
+      }
+      .course-reader-card {
+        padding: 1.5rem 1.15rem;
+        border-radius: var(--radius-md);
+      }
+      .reader-title {
+        font-size: 1.35rem;
+        line-height: 1.35;
+      }
+      .exam-split {
+        grid-template-columns: 1fr;
+      }
+      .palette-sidebar {
+        display: none; /* Replaced by mobile bottom sheet modal! */
+      }
+      .exam-hero {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+      }
+      .sets-filter {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.35rem;
+        scrollbar-width: none;
+      }
+      .sets-filter::-webkit-scrollbar {
+        display: none;
+      }
+      .set-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .score-target-badge {
+        justify-content: space-between;
+      }
+      .question-card {
+        padding: 1.25rem 1rem;
+      }
+      .choice-row {
+        padding: 0.75rem 0.85rem;
+        font-size: 0.95rem;
+        min-height: 48px;
+        touch-action: manipulation;
+      }
+      .choice-row:active {
+        transform: scale(0.99);
+      }
+      .table-responsive, .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 1rem 0;
+      }
+      .course-table, .modern-table {
+        min-width: 540px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 0.55rem 0.85rem;
+        gap: 0.5rem;
+      }
+      .brand-text span {
+        display: none;
+      }
+      .brand-text h1 {
+        font-size: 1.02rem;
+      }
+      .mode-nav {
+        display: none;
+      }
+      .search-wrapper {
+        width: 125px;
+      }
+      .search-wrapper input {
+        font-size: 0.78rem;
+        padding: 0.35rem 0.6rem 0.35rem 1.65rem;
+      }
+      .main-container {
+        padding: 0 0.65rem;
+        margin-top: 0.85rem;
+      }
+      .palette-grid {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 0.25rem;
+      }
+      .pal-btn {
+        font-size: 0.7rem;
+      }
     }
   </style>
 </head>
@@ -1181,8 +1522,15 @@
          VIEW 1: COURSE STUDY HUB (ห้องเรียนสรุปเข้ม 10 บทเรียน)
          ======================================================== -->
     <div id="course-view" style="display: block;">
+      <!-- Mobile Horizontal Chapter Scroll Bar -->
+      <div class="mobile-chapter-bar">
+        <div class="mobile-chapter-scroll" id="mobileChapterScroll">
+          <!-- Dynamic Pills: หมวด 1, หมวด 2, ... -->
+        </div>
+      </div>
+
       <div class="course-layout">
-        <!-- Sidebar TOC -->
+        <!-- Sidebar TOC (Desktop) -->
         <aside class="course-toc">
           <h3>สารบัญ 10 หมวดการเรียนรู้</h3>
           <ul class="toc-list" id="toc-container">
@@ -1204,6 +1552,12 @@
           <div class="course-body" id="reader-content">
             <!-- Dynamic Textbook Content -->
           </div>
+
+          <!-- Chapter Footer Navigation (Mobile & Desktop) -->
+          <div class="chapter-nav-footer">
+            <button class="chap-nav-btn" id="btnPrevChapter" onclick="navigateChapter(-1)">◀ หมวดก่อนหน้า</button>
+            <button class="chap-nav-btn next" id="btnNextChapter" onclick="navigateChapter(1)">หมวดถัดไป ▶</button>
+          </div>
         </section>
       </div>
     </div>
@@ -1212,6 +1566,17 @@
          VIEW 2: REALISTIC EXAM SIMULATOR (ห้องสอบจำลอง 100 ข้อ/ชุด)
          ======================================================== -->
     <div id="exam-view" style="display: none;">
+      <!-- Mobile Sticky Action Bar with Palette Opener -->
+      <div class="mobile-exam-floating-bar" id="mobileExamBar">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <span style="font-family: var(--font-sans); font-size: 0.82rem; font-weight: 700; color: var(--text-main);" id="mobExamSetTitle">ชุดที่ 1</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted);" id="mobExamScoreStat">0/100</span>
+        </div>
+        <button class="mob-open-pal-btn" onclick="toggleMobilePalette(true)">
+          📋 แผง 1-100 <span id="mobExamUnansweredBadge" style="background: var(--teal); color: white; padding: 0.1rem 0.35rem; border-radius: var(--radius-full); font-size: 0.7rem; margin-left: 0.2rem;">100</span>
+        </button>
+      </div>
+
       <!-- Hero Filter & Target Bar -->
       <div class="exam-hero">
         <div class="sets-filter">
@@ -1240,7 +1605,7 @@
           <!-- Dynamic Question Cards -->
         </div>
 
-        <!-- Question Palette Sidebar -->
+        <!-- Question Palette Sidebar (Desktop) -->
         <aside class="palette-sidebar">
           <div class="palette-header">
             <h3>แผงข้อสอบ 1 - 100</h3>
@@ -1271,22 +1636,66 @@
       </div>
     </div>
 
+    <!-- Mobile Palette Bottom Sheet Modal (Drawer) -->
+    <div class="mobile-palette-backdrop" id="mobilePaletteBackdrop" onclick="toggleMobilePalette(false)">
+      <div class="mobile-palette-sheet" onclick="event.stopPropagation()">
+        <div class="sheet-handle-bar"></div>
+        <div class="sheet-header">
+          <div>
+            <h3>แผงข้อสอบ 1 - 100</h3>
+            <span id="mob-sheet-stat" style="font-size: 0.8rem; font-weight: 600; color: var(--teal);">ทำแล้ว 0/100</span>
+          </div>
+          <button class="sheet-close-btn" onclick="toggleMobilePalette(false)">✕</button>
+        </div>
+
+        <div class="palette-filter-row">
+          <button class="pal-filter-btn active" onclick="filterPalette('all')">ทั้งหมด</button>
+          <button class="pal-filter-btn" onclick="filterPalette('unanswered')">ยังไม่ทำ</button>
+          <button class="pal-filter-btn" onclick="filterPalette('flagged')">ปักหมุด</button>
+        </div>
+
+        <div class="palette-grid" id="mobile-palette-grid">
+          <!-- 100 Question Square Buttons -->
+        </div>
+
+        <div class="palette-legend" style="margin-top: 0.75rem; padding-top: 0.5rem;">
+          <div class="legend-item"><span class="legend-dot" style="background: var(--surface); border: 1px solid var(--border);"></span> ยังไม่ทำ</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--emerald);"></span> ตอบถูก</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--rose);"></span> ตอบผิด</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--amber);"></span> ปักหมุด</div>
+        </div>
+
+        <button class="next-unanswered-btn" onclick="jumpToNextUnanswered(); toggleMobilePalette(false);" style="margin-top: 0.75rem;">
+          ⏩ ข้ามไปข้อถัดไปที่ยังไม่ทำ
+        </button>
+      </div>
+    </div>
 
     <!-- Confetti Overlay Canvas -->
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- Cute Mascot Study Companion (Dr. Bony 🦴) -->
-    <div class="mascot-widget" id="mascotWidget">
-      <div class="mascot-bubble" id="mascotBubble" onclick="changeMascotTip()">
-        <span style="font-size: 0.72rem; font-weight: 700; color: var(--teal); display: block; margin-bottom: 0.15rem;">Dr. Bony (พี่หมอโบนี่)</span>
-        <span id="mascotText">ยินดีต้อนรับครับคุณหมอ! มาลุยสอบใบประกอบวิชาชีพ 03 ไปด้วยกันนะ 🦴✨</span>
-      </div>
-      <div class="mascot-avatar-btn" onclick="toggleMascotBubble()" title="คลิกคุยกับพี่หมอโบนี่">
-        🦴
-      </div>
-    </div>
-
   </main>
+
+  <!-- Mobile Native-feel Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <button class="mob-nav-item active" id="mob-tab-course" onclick="switchView('course')">
+      <span class="icon">📖</span>
+      <span>บทเรียน</span>
+    </button>
+    <button class="mob-nav-item" id="mob-tab-exam" onclick="switchView('exam')">
+      <span class="icon">📝</span>
+      <span>ทำข้อสอบ</span>
+    </button>
+    <button class="mob-nav-item" id="mob-tab-pal" onclick="toggleMobilePalette(true)">
+      <span class="icon">📋</span>
+      <span>แผง 100 ข้อ</span>
+      <span class="mob-nav-badge" id="mob-badge-answered">0</span>
+    </button>
+    <button class="mob-nav-item" id="mob-tab-theme" onclick="toggleTheme()">
+      <span class="icon" id="mob-theme-icon">🌙</span>
+      <span>ธีม</span>
+    </button>
+  </nav>
 
   <!-- Load External Scripts -->
   <script src="course_data.js"></script>
@@ -1305,7 +1714,7 @@
 
     
     /* ========================================================
-       CUTE FEATURES: THEME, SOUND, MASCOT, CONFETTI & LEVEL
+       STUDY COMPANION: THEME, SOUND, CONFETTI & REWARDS
        ======================================================== */
     let currentTheme = localStorage.getItem('physio_theme') || 'light';
     let soundEnabled = localStorage.getItem('physio_sound') !== 'false';
@@ -1315,6 +1724,10 @@
     // Apply saved theme on load
     if (currentTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.innerText = '☀️';
+      const mobIcon = document.getElementById('mob-theme-icon');
+      if (mobIcon) mobIcon.innerText = '☀️';
     }
 
     function toggleTheme() {
@@ -1325,6 +1738,9 @@
       
       const btn = document.getElementById('themeToggleBtn');
       if (btn) btn.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+      const mobIcon = document.getElementById('mob-theme-icon');
+      if (mobIcon) mobIcon.innerText = newTheme === 'dark' ? '☀️' : '🌙';
+
       playChime(newTheme === 'dark' ? [440, 330] : [330, 440]);
     }
 
@@ -1374,41 +1790,6 @@
 
     function playFanfareSound() {
       playChime([523.25, 659.25, 783.99, 1046.50], 'triangle', 0.15); // Full C Major fanfare
-    }
-
-    // Mascot Tips & Interaction
-    const mascotTips = [
-      "สูตร Wainner Cluster: Spurling A + Distraction + ULTT 1 + Rotation < 60° จำให้แม่นนะ! 💡",
-      "กฎ Scoliosis: 'ยืดด้านเว้า (Concave) / เสริมแรงด้านนูน (Convex)' อย่าสับสนนะคุณหมอ! 🦴",
-      "เด็ก Down Syndrome ที่มี AAI ห้ามเล่นแทรมโพลีนและม้วนหน้าม้วนหลังเด็ดขาด! ⚠️",
-      "Duchenne Muscular Dystrophy (DMD) มีข้อห้ามสำคัญคือ 'ห้ามทำ Eccentric Exercise'! ❌",
-      "Autonomic Dysreflexia ในคนไข้ SCI T6 ขึ้นไป สิ่งแรกที่ต้องทำคือ 'จับนั่ง 90° ทันที'! 🚨",
-      "กฎขึ้นลงบันได: 'ขึ้นเอาขาดีขึ้นก่อน ลงเอาไม้และขาเจ็บลงก่อน' (Up with good, Down with bad) 🪜",
-      "พักสายตาสัก 20 วินาที มองออกไปไกลๆ แล้วค่อยลุยข้อต่อไปนะคุณหมอ! 👁️💧",
-      "ความพยายามในวันนี้ คือเสื้อกาวน์ที่มีชื่อเราในวันข้างหน้านะครับ สู้ๆ! 🥼✨"
-    ];
-
-    function changeMascotTip() {
-      const idx = Math.floor(Math.random() * mascotTips.length);
-      document.getElementById('mascotText').innerText = mascotTips[idx];
-      playChime([659.25, 783.99]);
-    }
-
-    function setMascotCheer(text) {
-      const bubble = document.getElementById('mascotBubble');
-      const textElem = document.getElementById('mascotText');
-      if (bubble && textElem) {
-        textElem.innerText = text;
-        bubble.style.display = 'block';
-      }
-    }
-
-    function toggleMascotBubble() {
-      const bubble = document.getElementById('mascotBubble');
-      if (bubble) {
-        bubble.style.display = bubble.style.display === 'none' ? 'block' : 'none';
-        if (bubble.style.display !== 'none') changeMascotTip();
-      }
     }
 
     // Canvas Confetti Celebration
@@ -1470,6 +1851,10 @@
 
     // Initialize Application
     document.addEventListener('DOMContentLoaded', () => {
+      // Set initial theme icon
+      const mobIcon = document.getElementById('mob-theme-icon');
+      if (mobIcon && currentTheme === 'dark') mobIcon.innerText = '☀️';
+
       initCourseHub();
       initExamSimulator();
     });
@@ -1479,8 +1864,18 @@
       document.getElementById('course-view').style.display = viewName === 'course' ? 'block' : 'none';
       document.getElementById('exam-view').style.display = viewName === 'exam' ? 'block' : 'none';
       
-      document.getElementById('btn-tab-course').classList.toggle('active', viewName === 'course');
-      document.getElementById('btn-tab-exam').classList.toggle('active', viewName === 'exam');
+      // Desktop Nav Pills
+      const dCourse = document.getElementById('btn-tab-course');
+      const dExam = document.getElementById('btn-tab-exam');
+      if (dCourse) dCourse.classList.toggle('active', viewName === 'course');
+      if (dExam) dExam.classList.toggle('active', viewName === 'exam');
+
+      // Mobile Bottom Nav
+      const mobCourse = document.getElementById('mob-tab-course');
+      const mobExam = document.getElementById('mob-tab-exam');
+      if (mobCourse) mobCourse.classList.toggle('active', viewName === 'course');
+      if (mobExam) mobExam.classList.toggle('active', viewName === 'exam');
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1490,22 +1885,38 @@
     function initCourseHub() {
       const data = window.COURSE_DATA || [];
       const toc = document.getElementById('toc-container');
-      toc.innerHTML = '';
+      const mobScroll = document.getElementById('mobileChapterScroll');
+
+      if (toc) toc.innerHTML = '';
+      if (mobScroll) mobScroll.innerHTML = '';
 
       if (data.length === 0) {
         document.getElementById('reader-title').innerText = 'ไม่พบข้อมูลบทเรียน';
         return;
       }
 
-      data.forEach((mod, idx) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <button class="toc-item-btn ${mod.id === currentChapterId ? 'active' : ''}" onclick="selectChapter(${mod.id})">
-            <span>${mod.icon || '📖'}</span>
-            <span>${mod.title.split(':')[0]}</span>
-          </button>
-        `;
-        toc.appendChild(li);
+      data.forEach((mod) => {
+        // Desktop TOC Item
+        if (toc) {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <button class="toc-item-btn ${mod.id === currentChapterId ? 'active' : ''}" onclick="selectChapter(${mod.id})">
+              <span>${mod.icon || '📖'}</span>
+              <span>${mod.title.split(':')[0]}</span>
+            </button>
+          `;
+          toc.appendChild(li);
+        }
+
+        // Mobile Horizontal Scroll Pill
+        if (mobScroll) {
+          const pill = document.createElement('button');
+          pill.className = `mob-chapter-pill ${mod.id === currentChapterId ? 'active' : ''}`;
+          pill.id = `mob-pill-${mod.id}`;
+          pill.innerHTML = `<span>${mod.icon || '📖'}</span> <span>หมวด ${mod.id}</span>`;
+          pill.onclick = () => selectChapter(mod.id);
+          mobScroll.appendChild(pill);
+        }
       });
 
       renderChapter(currentChapterId);
@@ -1513,11 +1924,34 @@
 
     function selectChapter(chapId) {
       currentChapterId = chapId;
+      const data = window.COURSE_DATA || [];
+
+      // Update Desktop TOC
       document.querySelectorAll('.toc-item-btn').forEach((btn, i) => {
-        const mod = (window.COURSE_DATA || [])[i];
+        const mod = data[i];
         if (mod) btn.classList.toggle('active', mod.id === chapId);
       });
+
+      // Update Mobile Scroll Pills
+      document.querySelectorAll('.mob-chapter-pill').forEach((pill, i) => {
+        const mod = data[i];
+        if (mod) pill.classList.toggle('active', mod.id === chapId);
+      });
+
+      const activePill = document.getElementById(`mob-pill-${chapId}`);
+      if (activePill) {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
       renderChapter(chapId);
+    }
+
+    function navigateChapter(delta) {
+      const data = window.COURSE_DATA || [];
+      const newId = currentChapterId + delta;
+      if (newId >= 1 && newId <= data.length) {
+        selectChapter(newId);
+      }
     }
 
     function renderChapter(chapId) {
@@ -1548,6 +1982,25 @@
       }
 
       contentDiv.innerHTML = html;
+
+      // Update Prev / Next Chapter Buttons
+      const btnPrev = document.getElementById('btnPrevChapter');
+      const btnNext = document.getElementById('btnNextChapter');
+      if (btnPrev) {
+        btnPrev.disabled = (chap.id <= 1);
+        btnPrev.style.visibility = (chap.id <= 1) ? 'hidden' : 'visible';
+        if (chap.id > 1) {
+          btnPrev.innerText = `◀ หมวดที่ ${chap.id - 1}`;
+        }
+      }
+      if (btnNext) {
+        btnNext.disabled = (chap.id >= data.length);
+        btnNext.style.visibility = (chap.id >= data.length) ? 'hidden' : 'visible';
+        if (chap.id < data.length) {
+          btnNext.innerText = `หมวดที่ ${chap.id + 1} ▶`;
+        }
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1572,11 +2025,19 @@
     }
 
     function renderExamSet(setId) {
+      currentSetId = setId;
       const setQuestions = getSetQuestions(setId);
       const container = document.getElementById('questions-column');
       container.innerHTML = '';
 
-      setQuestions.forEach((q, localIdx) => {
+      // Update Mobile Floating Bar Title
+      const mobTitle = document.getElementById('mobExamSetTitle');
+      if (mobTitle) {
+        const titles = ['ชุด 1: MSK', 'ชุด 2: Neuro', 'ชุด 3: Peds', 'ชุด 4: Cardio/Burns', 'ชุด 5: Mock Exam'];
+        mobTitle.innerText = titles[setId - 1] || `ชุดที่ ${setId}`;
+      }
+
+      setQuestions.forEach((q) => {
         const qKey = `${setId}_${q.num}`;
         const state = userExamState[qKey] || { choiceIndex: null, isFlagged: false };
         const isAnswered = state.choiceIndex !== null;
@@ -1623,6 +2084,13 @@
             ${q.wrong_analysis ? `<div class="wrong-analysis-block"><strong>🔍 วิเคราะห์ตัวเลือกอื่น:</strong> ${q.wrong_analysis}</div>` : ''}
             ${q.pearl ? `<div class="pearl-callout">💡 <strong>Clinical Pearl:</strong> ${q.pearl}</div>` : ''}
           </div>
+
+          <!-- Touch-friendly Stepper Navigation (Mobile & Desktop) -->
+          <div class="q-nav-actions">
+            ${q.num > 1 ? `<button class="q-step-btn" onclick="jumpToQuestion(${q.num - 1})">◀ ข้อ ${q.num - 1}</button>` : `<span></span>`}
+            <button class="q-step-btn unanswered-step" onclick="jumpToNextUnanswered()">ข้ามไปข้อที่ยังไม่ทำ ⏩</button>
+            ${q.num < 100 ? `<button class="q-step-btn" onclick="jumpToQuestion(${q.num + 1})">ข้อ ${q.num + 1} ▶</button>` : `<span></span>`}
+          </div>
         `;
 
         container.appendChild(card);
@@ -1647,10 +2115,8 @@
 
       if (isCorrect) {
         playCorrectSound();
-        setMascotCheer("เก่งมากคุณหมอ! ตอบถูกต้อง +1 คะแนน 🎉✨");
       } else {
         playWrongSound();
-        setMascotCheer("ข้อนี้ไม่เป็นไรนะคุณหมอ อ่านเฉลยข้างล่างแล้วเก็บเป็นสูตรจำไว้สอบจริง! 💡");
       }
 
       // Re-render specific card
@@ -1687,9 +2153,31 @@
       renderPaletteGrid();
     }
 
+    function toggleMobilePalette(forceOpen) {
+      if (currentView !== 'exam') {
+        switchView('exam');
+      }
+      const backdrop = document.getElementById('mobilePaletteBackdrop');
+      if (!backdrop) return;
+
+      if (typeof forceOpen === 'boolean') {
+        backdrop.classList.toggle('open', forceOpen);
+      } else {
+        backdrop.classList.toggle('open');
+      }
+
+      if (backdrop.classList.contains('open')) {
+        renderPaletteGrid();
+      }
+    }
+
     function renderPaletteGrid() {
-      const grid = document.getElementById('palette-grid');
-      grid.innerHTML = '';
+      const desktopGrid = document.getElementById('palette-grid');
+      const mobileGrid = document.getElementById('mobile-palette-grid');
+
+      if (desktopGrid) desktopGrid.innerHTML = '';
+      if (mobileGrid) mobileGrid.innerHTML = '';
+
       const setQuestions = getSetQuestions(currentSetId);
 
       setQuestions.forEach(q => {
@@ -1701,16 +2189,34 @@
         if (paletteFilter === 'unanswered' && isAnswered) return;
         if (paletteFilter === 'flagged' && !state.isFlagged) return;
 
-        const btn = document.createElement('button');
-        btn.className = 'pal-btn';
-        if (isAnswered) {
-          btn.classList.add(state.isCorrect ? 'answered-correct' : 'answered-wrong');
+        // Desktop Grid Button
+        if (desktopGrid) {
+          const btn = document.createElement('button');
+          btn.className = 'pal-btn';
+          if (isAnswered) {
+            btn.classList.add(state.isCorrect ? 'answered-correct' : 'answered-wrong');
+          }
+          if (state.isFlagged) btn.classList.add('flagged');
+          btn.innerText = q.num;
+          btn.onclick = () => jumpToQuestion(q.num);
+          desktopGrid.appendChild(btn);
         }
-        if (state.isFlagged) btn.classList.add('flagged');
 
-        btn.innerText = q.num;
-        btn.onclick = () => jumpToQuestion(q.num);
-        grid.appendChild(btn);
+        // Mobile Drawer Grid Button
+        if (mobileGrid) {
+          const mBtn = document.createElement('button');
+          mBtn.className = 'pal-btn';
+          if (isAnswered) {
+            mBtn.classList.add(state.isCorrect ? 'answered-correct' : 'answered-wrong');
+          }
+          if (state.isFlagged) mBtn.classList.add('flagged');
+          mBtn.innerText = q.num;
+          mBtn.onclick = () => {
+            jumpToQuestion(q.num);
+            toggleMobilePalette(false);
+          };
+          mobileGrid.appendChild(mBtn);
+        }
       });
     }
 
@@ -1727,7 +2233,11 @@
       if (targetCard) {
         document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active-target'));
         targetCard.classList.add('active-target');
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // On mobile, account for sticky header offset (-90px)
+        const yOffset = -90;
+        const y = targetCard.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }
 
@@ -1741,7 +2251,7 @@
           return;
         }
       }
-      alert('ยินดีด้วยครับ! คุณทำข้อสอบครบทุกข้อในชุดนี้เรียบร้อยแล้ว');
+      alert('ยินดีด้วยครับ! คุณทำข้อสอบครบทั้ง 100 ข้อในชุดนี้เรียบร้อยแล้ว');
     }
 
     function updateScoreboard() {
@@ -1758,23 +2268,44 @@
         }
       });
 
-      document.getElementById('score-display').innerText = `${correctCount} / 100`;
-      document.getElementById('answered-stat').innerText = `ทำแล้ว ${answeredCount}/100`;
+      const scoreText = `${correctCount} / 100`;
+      const answeredText = `ทำแล้ว ${answeredCount}/100`;
+
+      // Desktop Elements
+      const scoreElem = document.getElementById('score-display');
+      if (scoreElem) scoreElem.innerText = scoreText;
+
+      const answeredElem = document.getElementById('answered-stat');
+      if (answeredElem) answeredElem.innerText = answeredText;
+
+      // Mobile Badges & Stats
+      const mobSheetStat = document.getElementById('mob-sheet-stat');
+      if (mobSheetStat) mobSheetStat.innerText = answeredText;
+
+      const mobBadge = document.getElementById('mob-badge-answered');
+      if (mobBadge) mobBadge.innerText = `${answeredCount}`;
+
+      const mobScoreStat = document.getElementById('mobExamScoreStat');
+      if (mobScoreStat) mobScoreStat.innerText = `${correctCount}/100 คะแนน (ทำแล้ว ${answeredCount}/100)`;
+
+      const mobUnansweredBadge = document.getElementById('mobExamUnansweredBadge');
+      if (mobUnansweredBadge) mobUnansweredBadge.innerText = `${100 - answeredCount}`;
 
       const passBadge = document.getElementById('pass-badge');
-      if (correctCount >= 60) {
-        passBadge.className = 'pass-indicator passed';
-        passBadge.innerText = `🎉 ผ่านเกณฑ์การสอบ (${correctCount}/100 - PASS)`;
-        if (!hasTriggeredPassConfetti) {
-          hasTriggeredPassConfetti = true;
-          launchConfetti();
-          playFanfareSound();
-          setMascotCheer("ไชโยยย! 🎊 คุณได้ " + correctCount + " คะแนน ผ่านเกณฑ์สอบสภาฯ 60/100 แล้ว! สุดยอดมากคุณหมอ! 🎓");
+      if (passBadge) {
+        if (correctCount >= 60) {
+          passBadge.className = 'pass-indicator passed';
+          passBadge.innerText = `🎉 ผ่านเกณฑ์การสอบ (${correctCount}/100 - PASS)`;
+          if (!hasTriggeredPassConfetti) {
+            hasTriggeredPassConfetti = true;
+            launchConfetti();
+            playFanfareSound();
+          }
+        } else {
+          const needed = 60 - correctCount;
+          passBadge.className = 'pass-indicator pending';
+          passBadge.innerText = `⚠️ ยังไม่ผ่าน (ต้องการอีก ${needed} คะแนนเพื่อผ่านเกณฑ์)`;
         }
-      } else {
-        const needed = 60 - correctCount;
-        passBadge.className = 'pass-indicator pending';
-        passBadge.innerText = `⚠️ ยังไม่ผ่าน (ต้องการอีก ${needed} คะแนนเพื่อผ่านเกณฑ์)`;
       }
     }
 
